@@ -1,0 +1,15 @@
+.bodyInd{
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top, #202631, #352538);
+    height: 100vh;
+}
+
+h1{
+    color: white;
+}
+
+nav{
+    background-color: rgba(53, 0, 70, 0.733);
+}
+

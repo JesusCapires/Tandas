@@ -1,0 +1,56 @@
+.bodyTan, .bodyPag{
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top, #202631, #352538);
+    height: 100vh;
+    /* text-align: center; */
+}
+.itemshead{
+    text-align: center;
+}
+.tand, .pago{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.login-button {
+    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to right, #512DA8, #1565C0);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  
+  .login-button:hover {
+    background: linear-gradient(to right, #311B92, #0D47A1);
+  }
+  
+
+#tableTandas, #tablePagos{
+    background-color: white;
+}
+
+
+#tableTandas_info,  #tablePagos_info,
+#tableTandas_length,  #tablePagos_length,   
+#tableTandas_paginate, #tablePagos_paginate,
+#tableTandas_filter, #tablePagos_filter,
+#tableTandas_length, #tablePagos_length,
+.dataTables_processing{
+  color: #fff;
+}
+
+.error{
+  color: rgb(81, 0, 105);
+}
+.error-message {
+  font-size: 14px;
+  margin-top: 5px;
+}
