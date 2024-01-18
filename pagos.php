@@ -183,7 +183,7 @@ $result = $conn->query($sql);
                         if(obj.result){
                             Swal.fire({
                                 icon: "success",
-                                title: "Registro exitoso",
+                                title: "Registro exitosso",
                                 showConfirmButton: false,
                                 timer: 1500
                             });
