@@ -84,7 +84,7 @@ $result = $conn->query($sql);
                     <form id="formRelojes">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="nombrer">Nombre:</label>
+                                <label for="nombrer">NombreT:</label>
                                 <input type="text" class="form-control" placeholder= "Nombre" id="nombrer" name="nombrer" required>
                             </div>
                             <div class="form-group col-md-6">
