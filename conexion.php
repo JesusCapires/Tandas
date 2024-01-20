@@ -29,20 +29,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     }
-    if($accion == 2){
+    if ($accion == 2) {
         $registros = $_POST["datos"];
         $personap = $_POST["datos"]["personap"];
         $montop = $_POST["datos"]["montop"];
         $nombrep = $_POST["datos"]["nombrep"];
-        
-        $insertPago = "INSERT INTO pagos(fecha, nomPaog, persona, monto) VALUES(NOW(), '$nombrep', '$personap', '$montop')";
+        $tipoP = $_POST["datos"]["tipoP"];
     
+        // Insertar el pago en la tabla pagos
+        $insertPago = "INSERT INTO pagos(fecha, nomPaog, persona, monto, tipoP) VALUES(NOW(), '$nombrep', '$personap', '$montop', '$tipoP')";
         $result = mysqli_query($conn, $insertPago);
-
-        if($result){
-            echo json_encode(array("result" => true, "registro" => $registros));
+    
+        if ($result) {
+            // Obtener el ID del último pago insertado
+            $idPago = mysqli_insert_id($conn);
+    
+            // Obtener la tanda correspondiente
+            $idTanda = $_POST["datos"]["idTanda"]; // Asegúrate de tener este valor disponible
+    
+            // Obtener el saldo actual de la tanda
+            $selectSaldo = "SELECT saldoAct FROM tandas WHERE idTanda = $idTanda";
+            $resultSaldo = mysqli_query($conn, $selectSaldo);
+            $filaSaldo = mysqli_fetch_assoc($resultSaldo);
+            $saldoActual = $filaSaldo['saldoAct'];
+            if($tipoP == "Entrega"){
+                $nuevoSaldo = $saldoActual + $montop;
+            }else{ 
+                $nuevoSaldo = $saldoActual - $montop;
+            }
+            // Actualizar el campo saldoAct en la tabla tandas
+            $updateSaldo = "UPDATE tandas SET saldoAct = $nuevoSaldo WHERE idTanda = $idTanda";
+            $resultUpdateSaldo = mysqli_query($conn, $updateSaldo);
+    
+            if ($resultUpdateSaldo) {
+                echo json_encode(array("result" => true, "registro" => $registros));
+            } else {
+                echo json_encode(array("result" => false, "error" => "Error al actualizar el saldo"));
+            }
+        } else {
+            echo json_encode(array("result" => false, "error" => "Error al insertar el pago"));
         }
-
     }
 
 }

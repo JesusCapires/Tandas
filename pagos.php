@@ -59,6 +59,7 @@ $result = $conn->query($sql);
             <th>Fecha</th>
             <th>Persona</th>
             <th>Monto</th>
+            <th>Tipo</th>
         </tr>
     </thead>
     <tbody>
@@ -67,6 +68,7 @@ $result = $conn->query($sql);
             <td><?php echo $row['fecha']; ?></td>
             <td><?php echo $row['persona']; ?></td>
             <td><?php echo $row['monto']; ?></td>
+            <td><?php echo $row['tipoP']; ?></td>
         </tr>
         <?php } ?>
     </tbody>
@@ -98,6 +100,31 @@ $result = $conn->query($sql);
                             <div class="form-group col-md-6">
                                 <label for="montop">Monto:</label>
                                 <input type="text" class="form-control" id="montop" name="montop" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="idTanda">Tanda:</label>
+                                <select class="form-control" id="idTanda" name="idTanda" required>
+                                    <?php
+                                    $tandas = "SELECT idTanda, nomTanda FROM tandas";
+                                    $result = $conn->query($tandas);
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<option value='" . $row['idTanda'] . "'>" . $row['nomTanda'] . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay tandas disponibles</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="tipoP">Tipo de pago:</label>
+                                <select class="form-control" id="tipoP" name="tipoP" required>
+                                    <option value="Entrega">Entrega</option>
+                                    <option value="Recibo">Recibo</option>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -189,7 +216,7 @@ $result = $conn->query($sql);
                             });
                         }
                         // table.destroy();
-                        table.row.add(obj.registro).draw();
+                        // table.row.add(obj.registro).draw();
 
                     },
                     error: function(xhr, status, error){

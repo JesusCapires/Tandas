@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <i class="fas fa-lock input-icon" style="color: #812CC6;"></i>
             <input type="password" name="password" placeholder="Contraseña" class="input-field">
         </div>
-        <button type="submit" class="login-button">LOGIN</button>
+        <button type="submit" class="login-button">Iniciar sesión</button>
       </form>
     </div>
   </div>
