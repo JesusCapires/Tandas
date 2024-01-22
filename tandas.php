@@ -1,8 +1,12 @@
 <?php
 include "conexion.php";
 $sql = "SELECT * FROM tandas";
-
 $result = $conn->query($sql);
+$turnoAct= "SELECT 
+  fecha_inicio, 
+  CURRENT_DATE() AS fecha_actual,
+  CEILING(DATEDIFF(CURRENT_DATE(), fecha_inicio) / 7) + 1 AS turno_actual
+FROM tandas";
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +61,7 @@ $result = $conn->query($sql);
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Turnos</th>
             <th>Saldo</th>
         </tr>
     </thead>
@@ -64,6 +69,7 @@ $result = $conn->query($sql);
     <?php while($row = $result->fetch_assoc()) { ?>
         <tr>
             <td><?php echo $row['nomTanda']; ?></td>
+            <td><?php echo $row['turnos']; ?></td>
             <td><?php echo $row['saldoAct']; ?></td>
         </tr>
         <?php } ?>
@@ -84,7 +90,7 @@ $result = $conn->query($sql);
                     <form id="formRelojes">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="nombrer">NombreT:</label>
+                                <label for="nombrer">Nombre:</label>
                                 <input type="text" class="form-control" placeholder= "Nombre" id="nombrer" name="nombrer" required>
                             </div>
                             <div class="form-group col-md-6">
